@@ -1,0 +1,5 @@
+name := "Programmation_Fonctionnel_Desclodures_Paturel"
+
+version := "0.1"
+
+scalaVersion := "2.13.6"

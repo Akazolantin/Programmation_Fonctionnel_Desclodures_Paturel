@@ -1,3 +1,5 @@
+package com.hei.fp.functions
+
 import play.api.libs.json.{JsValue, Json}
 import scalaj.http.{Http, HttpResponse}
 
@@ -5,7 +7,7 @@ import java.util.Calendar
 import scala.collection.mutable.ArrayBuffer
 
 
-object CallAPI {
+class CallAPI {
   def callAPI(): ArrayBuffer[Array[Any]] = {
 
     val request: HttpResponse[String] = Http("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=DAI.DEX&outputsize=full&datatype=json&apikey=EXALLWIOROD5BP80").param("q","monkeys").asString
@@ -33,20 +35,13 @@ object CallAPI {
       }
     }
     //Affichage de la liste compléte
-    allElement.foreach(r=> {
-      r.foreach(d=>print(d+" - "))
-      println()
-    })
+   // allElement.foreach(r=> {
+     // r.foreach(d=>print(d+" - "))
+     // println()
+   // })
 
     return allElement
 
   }
 
-}
-
-object Main {
-  def main(args: Array[String]): Unit = {
-    val tab =  CallAPI.callAPI()
-    print(tab(1)(0))
-  }
 }

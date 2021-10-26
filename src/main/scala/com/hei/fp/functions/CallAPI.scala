@@ -8,7 +8,7 @@ import scala.collection.mutable.ArrayBuffer
 
 
 class CallAPI {
-  def callAPI(): ArrayBuffer[Array[Any]] = {
+  def callAPI(number: Int): ArrayBuffer[Array[Any]] = {
 
     val request: HttpResponse[String] = Http("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=DAI.DEX&outputsize=full&datatype=json&apikey=EXALLWIOROD5BP80").param("q","monkeys").asString
     val json : JsValue  = Json.parse(request.body)
@@ -16,8 +16,8 @@ class CallAPI {
 
     var allElement = new ArrayBuffer[Array[Any]]();
     var i = 0
-    for( x <-0 to 1000) {
-      now.set(2021,10,12)
+    for( x <-0 to number) {
+      now.set(2021,10,26)
       val element: Array[Any] = new Array[Any](6);
       now.set(Calendar.DATE, (now.get(Calendar.DATE) - x))
       try {
@@ -34,11 +34,6 @@ class CallAPI {
         case exception: Exception=>{}
       }
     }
-    //Affichage de la liste compléte
-   // allElement.foreach(r=> {
-     // r.foreach(d=>print(d+" - "))
-     // println()
-   // })
 
     return allElement
 

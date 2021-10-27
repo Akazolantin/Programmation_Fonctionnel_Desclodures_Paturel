@@ -195,24 +195,38 @@ object Main {
     val resList1 = res1.toArray
 
     val breezePlot = new BreezePlot()
-    breezePlot.setCol(5)
-    breezePlot.setRow(2)
+    breezePlot.setCol(2)
+    breezePlot.setRow(4)
+
     breezePlot.addLine(moyenne_mobile(liste1),20)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
     breezePlot.addLine(Bollinger(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
     breezePlot.addLine(moyenne_mobile_pondérée(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
     breezePlot.addLine(moyenne_mobile_exponentielle(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
     breezePlot.addLine(Tenkan_Sen(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
     breezePlot.addLine(Kijun_Sen(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
     breezePlot.addLine(Senkou_SpanA(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
     breezePlot.addLine(enveloppes(liste1),0)
-    breezePlot.addGraf()
     breezePlot.addLine(resList1,0)
   }
 }

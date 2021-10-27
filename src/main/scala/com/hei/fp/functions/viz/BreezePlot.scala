@@ -1,21 +1,21 @@
 package com.hei.fp.functions.viz
 
 import breeze.linalg._
-import breeze.plot.PaintScaleFactory.singletonFactoryForPaintScale
 import breeze.plot._
-import breeze.stats.distributions.{RandBasis, ThreadLocalRandomGenerator}
-import org.apache.commons.math3.random.MersenneTwister
-import play.api.libs.functional.syntax.toApplicativeOps
+import breeze.stats.distributions.RandBasis
 
 // https://zwild.github.io/posts/plotly-examples-for-scala/
 // api doc : http://www.scalanlp.org/api/breeze/index.html#breeze.package
 
 class BreezePlot {
 
-
   val fig = Figure()
 
-  val p = fig.subplot(0)
+  var i : Int = 1
+  var col : Int = 2
+  var row : Int = 2
+
+  val p = fig.subplot(col,row,0)
   val x = linspace(0.0, 1.0)
   p += plot(x, x ^:^ 2.0)
   p += plot(x, x ^:^ 3.0, '.')
@@ -23,21 +23,36 @@ class BreezePlot {
   p.xlabel = "x axis"
   p.ylabel = "y axis"
 
-  val seed: Int = 0
-  val randBasis: RandBasis = new RandBasis(new ThreadLocalRandomGenerator(new MersenneTwister(seed)))
-  val p2 = fig.subplot(2, 2, 1)
-  val g2 = breeze.stats.distributions.Gaussian(0, 1)(randBasis)
-  p2 += hist(g2.sample(100000), 100)
-  p2.title = "A normal distribution"
+  var currentPlot = p
 
-  val p3 = fig.subplot(2, 2, 2)
-  val x3 = linspace(0.0, 1.0, 100)
-  val size3 = 0.1 * DenseVector.rand(100)
-  p3 += scatter(x3, x3 ^:^ 2.0, size3.apply)
-  p3.title = "scatter plotting"
+  def addGraf(): Unit ={
+    val p = fig.subplot(col,row,i)
+    currentPlot = p
+    i += 1
+  }
 
-  val p4 = fig.subplot(2, 2, 3)
-  p4 += image(DenseMatrix.rand(200, 200))
-  p4.title = "A random distribution"
+  def addLine(array : Array[Double],start : Int): Unit ={
+    var Y : Array[Double] = reverse(array)
+    var X : Array[Double] = new Array[Double](Y.size)
+    for(x <- start to Y.size+start ){
+      X(x-start)= x
+    }
+    currentPlot += plot(X,Y)
+  }
 
+  def reverse(array : Array[Double]): Array[Double] ={
+    var result : Array[Double] = new Array[Double](array.size)
+    for(x <- 0 to array.size){
+      result(x) = array(array.size - x)
+    }
+    return result
+  }
+
+  def setCol(n : Int) : Unit={
+    col=n
+  }
+
+  def setRow(n : Int) : Unit={
+    row=n
+  }
 }

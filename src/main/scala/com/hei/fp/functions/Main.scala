@@ -22,7 +22,7 @@ object Main {
 
 
     //moyenne mobile pour les derniers 20 jours
-    def moyenne_mobile(list: ArrayBuffer[Array[Any]]): List[Double] = {
+    def moyenne_mobile(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var somme: Double = 0.0
       var res = new ListBuffer[Double]()
       for (i <- 20 to list.length) {
@@ -32,7 +32,7 @@ object Main {
         somme = somme / 20
         res += somme
       }
-      val resList = res.toList
+      val resList = res.toArray
       return resList
     }
 
@@ -42,7 +42,7 @@ object Main {
 
     //Bollinger avec la moyenne mobile sur 20 jours (la valeur on fait +/- la valeur close pour faire un encadrement faire 2 fonctions ? pour valeur haute/basse ?
     //a vérifier
-    def Bollinger(list: ArrayBuffer[Array[Any]]): List[Double] = {
+    def Bollinger(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var somme: Double = 0.0
       var res = new ListBuffer[Double]()
       for (i <- 20 to list.length) {
@@ -55,14 +55,14 @@ object Main {
         res += somme
       }
 
-      val resList = res.toList
+      val resList = res.toArray
       return resList
     }
 
     //println(Bollinger(liste1))
 
     //moyenn pondéré fini et fonctionne
-    def moyenne_mobile_pondérée(list: ArrayBuffer[Array[Any]]): List[Double] = {
+    def moyenne_mobile_pondérée(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var somme1: Double = 0.0
       var somme2: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -81,14 +81,14 @@ object Main {
         res += sommeFin
         somme1 = 0
       }
-      val resList = res.toList
+      val resList = res.toArray
       return resList
     }
 
     //println("moyenne mobile pond")
     //println(moyenne_mobile_pondérée(liste1))
 
-    def moyenne_mobile_exponentielle(list: ArrayBuffer[Array[Any]]): List[Double] = {
+    def moyenne_mobile_exponentielle(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       val y = 1.5 //facteur de lissage
       var m: Double = y / 21
       var s = 0
@@ -102,7 +102,7 @@ object Main {
         s = s + 1
         listmme += r
       }
-      val rlist = listmme.toList
+      val rlist = listmme.toArray
       return rlist
     }
 
@@ -112,7 +112,7 @@ object Main {
     //Autre graph fait de 4 fonctions
 
     //Fonction 1
-    def Tenkan_Sen(list: ArrayBuffer[Array[Any]]): List[Double] = {
+    def Tenkan_Sen(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
       for (n <- 8 to list.length-1){
@@ -129,7 +129,7 @@ object Main {
         moy=(max1+min1)/2
         res+=moy
       }
-      val resList = res.toList
+      val resList = res.toArray
       return resList
     }
 
@@ -137,7 +137,7 @@ object Main {
 
 
     //2eme fonction
-    def Kijun_Sen(list: ArrayBuffer[Array[Any]]): List[Double] = {
+    def Kijun_Sen(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
       for (n <- 26 to list.length-1){
@@ -154,28 +154,28 @@ object Main {
         moy=(max2+min2)/2
         res+=moy
       }
-      val resList = res.toList
+      val resList = res.toArray
       return resList
     }
 
     //println(Kijun_Sen(liste1))
 
     //3eme  et derniere fonction
-    def Senkou_SpanA(list: ArrayBuffer[Array[Any]]): List[Double] = {
+    def Senkou_SpanA(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
       for(n<-0 to list.length-27) {
       moy = (Tenkan_Sen(list)(n+2)+Kijun_Sen(list)(n))/2
       res+=moy
       }
-      val resList = res.toList
+      val resList = res.toArray
       return resList
     }
 
     //println(Senkou_SpanA(liste1))
 
     //valeur haute et basse 2 fonctions ?
-    def enveloppes(list: ArrayBuffer[Array[Any]]): List[Double] = {
+    def enveloppes(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy : Double = 0.0
       var res = new ListBuffer[Double]()
       for (i <- 0 to moyenne_mobile(list).length){
@@ -183,7 +183,7 @@ object Main {
         moy = moy + 4/100 * moy
         res+=moy
       }
-      val resList = res.toList
+      val resList = res.toArray
       return resList
     }
   }

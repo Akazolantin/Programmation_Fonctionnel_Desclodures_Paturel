@@ -15,11 +15,12 @@ class CallAPI {
     val now = Calendar.getInstance()
 
     var allElement = new ArrayBuffer[Array[Any]]();
-    var i = 0
-    for( x <-0 to number) {
+    var x = 0
+    while( allElement.size<number) {
       now.set(2021,10,26)
       val element: Array[Any] = new Array[Any](6);
       now.set(Calendar.DATE, (now.get(Calendar.DATE) - x))
+      x+=1
       try {
         val date: String = now.get(Calendar.YEAR) + "-" +  "%02d".format(now.get(Calendar.MONTH)) + "-" + "%02d".format(now.get(Calendar.DATE))
         element(0) = date
@@ -29,7 +30,6 @@ class CallAPI {
         element(4) = (json("Time Series (Daily)")(date)("4. close").toString().slice(1,(json("Time Series (Daily)")(date)("4. close").toString()).size-2).toDouble)
         element(5) = (json("Time Series (Daily)")(date)("5. volume").toString().slice(1,(json("Time Series (Daily)")(date)("5. volume").toString()).size-2).toDouble)
         allElement += element;
-        i=i+1
       }catch{
         case exception: Exception=>{}
       }

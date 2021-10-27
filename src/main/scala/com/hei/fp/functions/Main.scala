@@ -2,6 +2,7 @@ package com.hei.fp.functions
 
 import breeze.math.i
 import breeze.numerics.sqrt
+import com.hei.fp.functions.viz.BreezePlot
 import play.api.libs.json.{JsValue, Json}
 import scalaj.http.{Http, HttpResponse}
 
@@ -186,5 +187,22 @@ object Main {
       val resList = res.toArray
       return resList
     }
+
+    val breezePlot = new BreezePlot()
+    breezePlot.setCol(4)
+    breezePlot.setRow(2)
+    breezePlot.addLine(moyenne_mobile(liste1),20)
+    breezePlot.addGraf()
+    breezePlot.addLine(Bollinger(liste1),0)
+    breezePlot.addGraf()
+    breezePlot.addLine(moyenne_mobile_pondérée(liste1),0)
+    breezePlot.addGraf()
+    breezePlot.addLine(moyenne_mobile_exponentielle(liste1),0)
+    breezePlot.addGraf()
+    breezePlot.addLine(Tenkan_Sen(liste1),0)
+    breezePlot.addGraf()
+    breezePlot.addLine(Kijun_Sen(liste1),0)
+    breezePlot.addGraf()
+    breezePlot.addLine(Senkou_SpanA(liste1),0)
   }
 }

@@ -12,7 +12,7 @@ object Main {
   def main(args: Array[String]): Unit = {
 
     val api : CallAPI = new CallAPI()
-    val liste1 = api.callAPI(21)
+    val liste1 = api.callAPI(40)
     //println(liste1(0)(0))
     //println(liste1(0)(4))
 
@@ -32,8 +32,7 @@ object Main {
       return resList
     }
 
-    println(liste1.length)
-    println(moyenne_mobile(liste1))
+    //println(moyenne_mobile(liste1))
 
 
     //Bollinger avec la moyenne mobile sur 20 jours (la valeur on fait +/- la valeur close pour faire un encadrement faire 2 fonctions ? pour valeur haute/basse ?
@@ -56,7 +55,7 @@ object Main {
 
     //println(Bollinger(liste1))
 
-
+    //moyenn pondéré fini et fonctionne
     def moyenne_mobile_pondérée(list: ArrayBuffer[Array[Any]]): List[Double] = {
       var somme1 : Double = 0.0
       var somme2 : Double = 0.0
@@ -68,10 +67,10 @@ object Main {
       }
       for (k <- 20 to list.length){
         for (n <- 0 to 19){
-          i=i-1
           somme1 = somme1 + (list(n+k-20)(4).asInstanceOf[Double] * i)
+          i=i-1
         }
-        i=0
+        i=20
         sommeFin = somme1 / somme2
         res += sommeFin
         somme1 = 0
@@ -80,7 +79,7 @@ object Main {
       return resList
     }
 
-    //println(moyenne_mobile_pondérée(liste1))
+    println(moyenne_mobile_pondérée(liste1))
     //println(liste1(0)(0))
     //println(liste1(0)(4))
   }

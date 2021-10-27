@@ -179,7 +179,7 @@ object Main {
     def enveloppes(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy : Double = 0.0
       var res = new ListBuffer[Double]()
-      for (i <- 0 to moyenne_mobile(list).length){
+      for (i <- 0 to moyenne_mobile(list).length-1){
         moy = moyenne_mobile(list)(i)
         moy = moy + 4/100 * moy
         res+=moy
@@ -188,8 +188,14 @@ object Main {
       return resList
     }
 
+    var res1 = new ListBuffer[Double]()
+    for (i<- 0 to liste1.length-1){
+      res1+=liste1(i)(4).asInstanceOf[Double]
+    }
+    val resList1 = res1.toArray
+
     val breezePlot = new BreezePlot()
-    breezePlot.setCol(4)
+    breezePlot.setCol(5)
     breezePlot.setRow(2)
     breezePlot.addLine(moyenne_mobile(liste1),20)
     breezePlot.addGraf()
@@ -204,5 +210,9 @@ object Main {
     breezePlot.addLine(Kijun_Sen(liste1),0)
     breezePlot.addGraf()
     breezePlot.addLine(Senkou_SpanA(liste1),0)
+    breezePlot.addGraf()
+    breezePlot.addLine(enveloppes(liste1),0)
+    breezePlot.addGraf()
+    breezePlot.addLine(resList1,0)
   }
 }

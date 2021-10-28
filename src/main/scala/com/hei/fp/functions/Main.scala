@@ -13,13 +13,7 @@ object Main {
   def main(args: Array[String]): Unit = {
 
     val api: CallAPI = new CallAPI()
-    val liste1 = api.callAPI(40)
-    //println(liste1(0)(0))
-    //println(liste1.length)
-
-    // for(i<- 0 to liste1.length-1)
-    // println(liste1(i).mkString("///"))
-    //}
+    val liste1 = api.callAPI(400)
 
 
     //moyenne mobile pour les derniers 20 jours
@@ -37,12 +31,7 @@ object Main {
       return resList
     }
 
-    //println("moyenne mobile")
-    //println(moyenne_mobile(liste1))
-
-
     //Bollinger avec la moyenne mobile sur 20 jours (la valeur on fait +/- la valeur close pour faire un encadrement faire 2 fonctions ? pour valeur haute/basse ?
-    //a vérifier
     def Bollinger(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var somme: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -59,8 +48,6 @@ object Main {
       val resList = res.toArray
       return resList
     }
-
-    //println(Bollinger(liste1))
 
     //moyenn pondéré fini et fonctionne
     def moyenne_mobile_pondérée(list: ArrayBuffer[Array[Any]]): Array[Double] = {
@@ -86,9 +73,6 @@ object Main {
       return resList
     }
 
-    //println("moyenne mobile pond")
-    //println(moyenne_mobile_pondérée(liste1))
-
     def moyenne_mobile_exponentielle(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       val y = 1.5 //facteur de lissage
       var m: Double = y / 21
@@ -107,12 +91,6 @@ object Main {
       return rlist
     }
 
-    //println("moyenne mobile expo")
-    //println(moyenne_mobile_exponentielle(liste1))
-
-    //Autre graph fait de 4 fonctions
-
-    //Fonction 1
     def Tenkan_Sen(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -134,10 +112,6 @@ object Main {
       return resList
     }
 
-    //println(Tenkan_Sen(liste1))
-
-
-    //2eme fonction
     def Kijun_Sen(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -159,9 +133,6 @@ object Main {
       return resList
     }
 
-    //println(Kijun_Sen(liste1))
-
-    //3eme  et derniere fonction
     def Senkou_SpanA(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -173,9 +144,6 @@ object Main {
       return resList
     }
 
-    //println(Senkou_SpanA(liste1))
-
-    //valeur haute et basse 2 fonctions ?
     def enveloppes(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy : Double = 0.0
       var res = new ListBuffer[Double]()
@@ -195,24 +163,46 @@ object Main {
     val resList1 = res1.toArray
 
     val breezePlot = new BreezePlot()
-    breezePlot.setCol(5)
-    breezePlot.setRow(2)
+    breezePlot.setCol(2)
+    breezePlot.setRow(4)
+
+    breezePlot.addTitle("Moyenne mobile")
     breezePlot.addLine(moyenne_mobile(liste1),20)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
+    breezePlot.addTitle("Bollinger")
     breezePlot.addLine(Bollinger(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
+    breezePlot.addTitle("Moyenne mobile pondérée")
     breezePlot.addLine(moyenne_mobile_pondérée(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
+    breezePlot.addTitle("Moyenne mobile exponentielle")
     breezePlot.addLine(moyenne_mobile_exponentielle(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
+    breezePlot.addTitle("Tenkan Sen")
     breezePlot.addLine(Tenkan_Sen(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
+    breezePlot.addTitle("Kijun Sen")
     breezePlot.addLine(Kijun_Sen(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
+    breezePlot.addTitle("Senkou Span A")
     breezePlot.addLine(Senkou_SpanA(liste1),0)
+    breezePlot.addLine(resList1,0)
+
     breezePlot.addGraf()
+    breezePlot.addTitle("Enveloppes")
     breezePlot.addLine(enveloppes(liste1),0)
-    breezePlot.addGraf()
     breezePlot.addLine(resList1,0)
   }
 }

@@ -27,21 +27,12 @@ class BreezePlot {
     currentPlot.title = name
   }
 
-  def addLine(array : Array[Double],start : Int): Unit ={
-    var Y : Array[Double] = reverse(array)
+  def addLine(Y : Array[Double],start : Int): Unit ={
     var X : Array[Double] = new Array[Double](Y.size)
-    for(x <- start to Y.size-1+start ){
-      X(x-start)= x
+    for(x <- 0 to Y.size-1 ){
+      X(x)= Y.size-1-x+start
     }
     currentPlot += plot(X,Y)
-  }
-
-  def reverse(array : Array[Double]): Array[Double] ={
-    var result : Array[Double] = new Array[Double](array.size)
-    for(x <- 0 to array.size-1){
-      result(x) = array(array.size-1 - x)
-    }
-    return result
   }
 
   def setCol(n : Int) : Unit={

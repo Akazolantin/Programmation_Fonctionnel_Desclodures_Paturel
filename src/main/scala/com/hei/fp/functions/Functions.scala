@@ -6,12 +6,6 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 class Functions {
 
-  def Call_API(number: Int): ArrayBuffer[Array[Any]] ={
-    val api: CallAPI = new CallAPI()
-    val liste1 = api.callAPI(number)
-    return liste1
-  }
-
   def list_bourse(list: ArrayBuffer[Array[Any]]): Array[Double] ={
     var res1 = new ListBuffer[Double]()
     for (i<- 0 to list.length-1){

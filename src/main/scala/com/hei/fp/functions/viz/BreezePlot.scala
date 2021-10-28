@@ -25,6 +25,10 @@ class BreezePlot {
     i += 1
   }
 
+  def addTitle(name : String):Unit = {
+    currentPlot.title = name
+  }
+
   def addLine(array : Array[Double],start : Int): Unit ={
     var Y : Array[Double] = reverse(array)
     var X : Array[Double] = new Array[Double](Y.size)

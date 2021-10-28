@@ -274,7 +274,7 @@ class FunctionsTest extends AnyFreeSpec{
 
   "addThree(Int, f(Int)) for 3 and anonymous x + 2 given " - {
     "should return 1 + (3+1) = " in {
-      val fnt = new FunctionsExercices()
+
       assert(??? == ???)
     }
   }
@@ -283,8 +283,7 @@ class FunctionsTest extends AnyFreeSpec{
     ": moyenn_mobile for gle_pa.sc " - {
       "should return 27" in {
         val liste = gle
-        val fnt = new functions.Main.
-        assert(moyenne_mobile == )
+        assert(??? == ???)
       }
     }
   }

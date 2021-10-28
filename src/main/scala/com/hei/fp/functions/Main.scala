@@ -31,12 +31,7 @@ object Main {
       return resList
     }
 
-    //println("moyenne mobile")
-    //println(moyenne_mobile(liste1))
-
-
     //Bollinger avec la moyenne mobile sur 20 jours (la valeur on fait +/- la valeur close pour faire un encadrement faire 2 fonctions ? pour valeur haute/basse ?
-    //a vérifier
     def Bollinger(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var somme: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -53,8 +48,6 @@ object Main {
       val resList = res.toArray
       return resList
     }
-
-    //println(Bollinger(liste1))
 
     //moyenn pondéré fini et fonctionne
     def moyenne_mobile_pondérée(list: ArrayBuffer[Array[Any]]): Array[Double] = {
@@ -80,9 +73,6 @@ object Main {
       return resList
     }
 
-    //println("moyenne mobile pond")
-    //println(moyenne_mobile_pondérée(liste1))
-
     def moyenne_mobile_exponentielle(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       val y = 1.5 //facteur de lissage
       var m: Double = y / 21
@@ -101,12 +91,6 @@ object Main {
       return rlist
     }
 
-    //println("moyenne mobile expo")
-    //println(moyenne_mobile_exponentielle(liste1))
-
-    //Autre graph fait de 4 fonctions
-
-    //Fonction 1
     def Tenkan_Sen(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -128,10 +112,6 @@ object Main {
       return resList
     }
 
-    //println(Tenkan_Sen(liste1))
-
-
-    //2eme fonction
     def Kijun_Sen(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -153,9 +133,6 @@ object Main {
       return resList
     }
 
-    //println(Kijun_Sen(liste1))
-
-    //3eme  et derniere fonction
     def Senkou_SpanA(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy: Double = 0.0
       var res = new ListBuffer[Double]()
@@ -167,9 +144,6 @@ object Main {
       return resList
     }
 
-    //println(Senkou_SpanA(liste1))
-
-    //valeur haute et basse 2 fonctions ?
     def enveloppes(list: ArrayBuffer[Array[Any]]): Array[Double] = {
       var moy : Double = 0.0
       var res = new ListBuffer[Double]()

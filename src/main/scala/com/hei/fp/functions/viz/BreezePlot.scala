@@ -1,8 +1,6 @@
 package com.hei.fp.functions.viz
 
-import breeze.linalg._
 import breeze.plot._
-import breeze.stats.distributions.RandBasis
 
 // https://zwild.github.io/posts/plotly-examples-for-scala/
 // api doc : http://www.scalanlp.org/api/breeze/index.html#breeze.package

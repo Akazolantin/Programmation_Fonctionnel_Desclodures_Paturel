@@ -13,7 +13,7 @@ object Main {
   def main(args: Array[String]): Unit = {
 
     val api: CallAPI = new CallAPI()
-    val liste1 = api.callAPI(400)
+    val liste1 = api.callAPI(2000)
 
 
     //moyenne mobile pour les derniers 20 jours
@@ -163,11 +163,11 @@ object Main {
     val resList1 = res1.toArray
 
     val breezePlot = new BreezePlot()
-    breezePlot.setCol(2)
-    breezePlot.setRow(4)
+    breezePlot.setCol(4)
+    breezePlot.setRow(2)
 
     breezePlot.addTitle("Moyenne mobile")
-    breezePlot.addLine(moyenne_mobile(liste1),20)
+    breezePlot.addLine(moyenne_mobile(liste1),10)
     breezePlot.addLine(resList1,0)
 
     breezePlot.addGraf()
@@ -177,32 +177,32 @@ object Main {
 
     breezePlot.addGraf()
     breezePlot.addTitle("Moyenne mobile pondérée")
-    breezePlot.addLine(moyenne_mobile_pondérée(liste1),0)
+    breezePlot.addLine(moyenne_mobile_pondérée(liste1),15)
     breezePlot.addLine(resList1,0)
 
     breezePlot.addGraf()
     breezePlot.addTitle("Moyenne mobile exponentielle")
-    breezePlot.addLine(moyenne_mobile_exponentielle(liste1),0)
+    breezePlot.addLine(moyenne_mobile_exponentielle(liste1),10)
     breezePlot.addLine(resList1,0)
 
     breezePlot.addGraf()
     breezePlot.addTitle("Tenkan Sen")
-    breezePlot.addLine(Tenkan_Sen(liste1),0)
+    breezePlot.addLine(Tenkan_Sen(liste1),5)
     breezePlot.addLine(resList1,0)
 
     breezePlot.addGraf()
     breezePlot.addTitle("Kijun Sen")
-    breezePlot.addLine(Kijun_Sen(liste1),0)
+    breezePlot.addLine(Kijun_Sen(liste1),10)
     breezePlot.addLine(resList1,0)
 
     breezePlot.addGraf()
     breezePlot.addTitle("Senkou Span A")
-    breezePlot.addLine(Senkou_SpanA(liste1),0)
+    breezePlot.addLine(Senkou_SpanA(liste1),20)
     breezePlot.addLine(resList1,0)
 
     breezePlot.addGraf()
     breezePlot.addTitle("Enveloppes")
-    breezePlot.addLine(enveloppes(liste1),0)
+    breezePlot.addLine(enveloppes(liste1),10)
     breezePlot.addLine(resList1,0)
   }
 }

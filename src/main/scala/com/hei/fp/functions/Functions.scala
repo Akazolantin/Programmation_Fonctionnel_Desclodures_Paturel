@@ -15,7 +15,7 @@ class Functions {
     return resList1
   }
 
-  //moyenne mobile pour les derniers 20 jours
+
   def moyenne_mobile(list: ArrayBuffer[Array[Any]]): Array[Double] = {
     var somme: Double = 0.0
     var res = new ListBuffer[Double]()
@@ -31,7 +31,7 @@ class Functions {
     return resList
   }
 
-  //moyenn pondéré fini et fonctionne
+
   def moyenne_mobile_pondérée(list: ArrayBuffer[Array[Any]]): Array[Double] = {
     var somme1: Double = 0.0
     var somme2: Double = 0.0
@@ -56,21 +56,21 @@ class Functions {
   }
 
   def moyenne_mobile_exponentielle(list: ArrayBuffer[Array[Any]]): Array[Double] = {
-    val y = 1.5 //facteur de lissage
+    val y = 1.5
     var m: Double = y / 21
-    var s = 0
-    var r = 0.0
-    var listmme = new ListBuffer[Double]()
-    listmme += moyenne_mobile_pondérée(list)(0)
+    var index = 0
+    var sommeFin = 0.0
+    var res = new ListBuffer[Double]()
+    res += moyenne_mobile_pondérée(list)(0)
     for (i <- 20 to list.length) {
       for (j <- i - 20 to i - 1) {
-        r = listmme(s) + m * (list(j)(4).asInstanceOf[Double] - listmme(s))
+        sommeFin = res(index) + m * (list(j)(4).asInstanceOf[Double] - res(index))
       }
-      s = s + 1
-      listmme += r
+      index = index + 1
+      res += sommeFin
     }
-    val rlist = listmme.toArray
-    return rlist
+    val resList = res.toArray
+    return resList
   }
 
   def Tenkan_Sen(list: ArrayBuffer[Array[Any]]): Array[Double] = {

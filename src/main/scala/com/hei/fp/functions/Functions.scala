@@ -24,26 +24,9 @@ class Functions {
         somme = somme + list(n)(4).asInstanceOf[Double]
       }
       somme = somme / 20
+
       res += somme
     }
-    val resList = res.toArray
-    return resList
-  }
-
-  //Bollinger avec la moyenne mobile sur 20 jours (la valeur on fait +/- la valeur close pour faire un encadrement faire 2 fonctions ? pour valeur haute/basse ?
-  def Bollinger(list: ArrayBuffer[Array[Any]]): Array[Double] = {
-    var somme: Double = 0.0
-    var res = new ListBuffer[Double]()
-    for (i <- 20 to list.length) {
-      for (n <- i - 20 to i - 1) {
-        somme = somme + ((list(n)(4).asInstanceOf[Double] - moyenne_mobile(list)(i - 20)) * (list(n)(4).asInstanceOf[Double] - moyenne_mobile(list)(i - 20)))
-      }
-      somme = somme / 20
-      somme = sqrt(somme)
-      somme = somme * 2
-      res += somme
-    }
-
     val resList = res.toArray
     return resList
   }
@@ -143,16 +126,26 @@ class Functions {
     return resList
   }
 
-  def enveloppes(list: ArrayBuffer[Array[Any]]): Array[Double] = {
+  def enveloppesHaut(list: ArrayBuffer[Array[Any]]): Array[Double] = {
     var moy : Double = 0.0
     var res = new ListBuffer[Double]()
     for (i <- 0 to moyenne_mobile(list).length-1){
       moy = moyenne_mobile(list)(i)
-      moy = moy + 4/100 * moy
+      moy = moy + (0.04 * moy)
       res+=moy
     }
     val resList = res.toArray
     return resList
+  }
+
+  def enveloppesBas(list: ArrayBuffer[Array[Any]]): Array[Double] = {
+    var envHaut = enveloppesHaut(list)
+    var moy : Double = 0.0
+    for (i <- 0 to envHaut.length-1){
+      moy = moyenne_mobile(list)(i)
+      envHaut(i)=envHaut(i)-(2*0.04*moy)
+    }
+    return envHaut
   }
 
 }
